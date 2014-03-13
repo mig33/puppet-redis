@@ -24,7 +24,7 @@ describe 'redis', :type => 'class' do
                                             :path   => '/opt/redis-src/redis-2.6.5.tar.gz',
                                             :mode   => '0644',
                                             :source => 'puppet:///modules/redis/redis-2.6.5.tar.gz')
-      should contain_exec('get-redis-pkg').with_command(/http:\/\/redis\.googlecode\.com\/files\/redis-2\.4\.13\.tar\.gz/)
+      should contain_exec('get-redis-pkg').with_command(/http:\/\/redis\.googlecode\.com\/files\/redis-2\.6\.5\.tar\.gz/)
       should contain_file('redis-cli-link').with(:ensure => 'link',
                                                  :path   => '/usr/local/bin/redis-cli',
                                                  :target => '/opt/redis/bin/redis-cli')
