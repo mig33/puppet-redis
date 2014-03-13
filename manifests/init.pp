@@ -64,7 +64,7 @@ class redis (
     path   => '/var/lib/redis',
   }
 
-  # If the version is 2.4.13, use the tarball that ships with the
+  # If the version is 2.6.5, use the tarball that ships with the
   # module.
   if ($version == '2.6.5') {
     file { 'redis-pkg':
