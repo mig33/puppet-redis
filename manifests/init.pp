@@ -92,7 +92,7 @@ class redis (
     require => Exec['get-redis-pkg'],
   }
 
-  if($version == '2.6.5')
+  if($version =~ /^2\.6\.\d+$/)
   {
     exec { 'install-redis':
       command => "make && make install PREFIX=${redis_bin_dir}",
@@ -100,7 +100,7 @@ class redis (
       path    => '/bin:/usr/bin',
       unless  => "test \"$(${redis_bin_dir}/bin/redis-server --version | cut -d ' ' -f 1,3)\" = 'Redis v=${version}'",
       require => [ Exec['unpack-redis'], Class['gcc'] ],
-    }
+    } -> notify { "Redis ${version} is installed": }
   }
   else
   {
@@ -110,7 +110,7 @@ class redis (
       path    => '/bin:/usr/bin',
       unless  => "test \"$(${redis_bin_dir}/bin/redis-server --version | cut -d ' ' -f 1,4)\" = 'Redis ${version}'",
       require => [ Exec['unpack-redis'], Class['gcc'] ],
-    }
+    } -> notify { "Redis ${version} is installed": }
   }
 
 }
